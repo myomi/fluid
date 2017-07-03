@@ -2,10 +2,12 @@
   "name": "fluid",
   "version": "0.1.0",
   "description": "Tiny Sales management application",
-  "main": "main.js",
+  "main": "dist/main/main.js",
   "scripts": {
-    "build": "tsc",
-    "start": "yarn run build && electron ."
+    "build": "yarn run clean && tsc",
+    "clean": "rimraf dist",
+    "start": "yarn run build && electron .",
+    "watch": "yarn run clean && tsc --watch"
   },
   "keywords": [
     "electron",
@@ -16,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.6.11",
+    "rimraf": "^2.6.1",
     "typescript": "^2.4.1"
   },
   "dependencies": {
