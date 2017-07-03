@@ -1,0 +1,15 @@
+{
+  "name": "fluid",
+  "version": "0.1.0",
+  "description": "Tiny Sales management application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": ["electron", "typescript", "elm"],
+  "author": "myomi",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.6.11"
+  }
+}
