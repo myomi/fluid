@@ -4,12 +4,21 @@
   "description": "Tiny Sales management application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "build": "tsc",
+    "start": "yarn run build && electron ."
   },
-  "keywords": ["electron", "typescript", "elm"],
+  "keywords": [
+    "electron",
+    "typescript",
+    "elm"
+  ],
   "author": "myomi",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.6.11"
+    "electron": "^1.6.11",
+    "typescript": "^2.4.1"
+  },
+  "dependencies": {
+    "chime.scss": "^0.1.0"
   }
 }
