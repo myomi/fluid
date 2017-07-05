@@ -1,8 +1,8 @@
 module Main exposing (..)
 
-import Html exposing (text)
+import Html exposing (Html, text)
 
 
-main : Html.Html msg
+main : Html msg
 main =
     text "Hello, Elm & Electron"
