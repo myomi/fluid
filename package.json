@@ -4,8 +4,10 @@
   "description": "Tiny Sales management application",
   "main": "dist/main/main.js",
   "scripts": {
-    "build": "yarn run clean && tsc",
+    "build": "yarn run clean && yarn run elm:make && tsc",
     "clean": "rimraf dist",
+    "elm:make": "elm-make --output dist/renderer/Main.js src/renderer/Main.elm",
+    "elm:install": "elm-package install",
     "start": "yarn run build && electron .",
     "watch": "yarn run clean && tsc --watch"
   },
@@ -22,6 +24,7 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
-    "chime.scss": "^0.1.0"
+    "chime.scss": "^0.1.0",
+    "elm": "^0.18.0"
   }
 }
