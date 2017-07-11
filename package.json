@@ -4,12 +4,14 @@
   "description": "Tiny Sales management application",
   "main": "dist/main/main.js",
   "scripts": {
-    "build": "yarn run clean && yarn run elm:make && tsc",
+    "build": "yarn run clean && webpack",
+    "build:renderer": "webpack",
     "clean": "rimraf dist",
     "elm:make": "elm-make --output dist/renderer/Main.js src/renderer/Main.elm",
     "elm:install": "elm-package install",
     "start": "yarn run build && electron .",
-    "watch": "yarn run clean && tsc --watch"
+    "watch": "yarn run clean && tsc --watch",
+    "electron": "electron ."
   },
   "keywords": [
     "electron",
@@ -19,9 +21,12 @@
   "author": "myomi",
   "license": "MIT",
   "devDependencies": {
+    "awesome-typescript-loader": "^3.2.1",
     "electron": "^1.6.11",
+    "elm-webpack-loader": "^4.3.1",
     "rimraf": "^2.6.1",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "webpack": "^3.0.0"
   },
   "dependencies": {
     "chime.scss": "^0.1.0",

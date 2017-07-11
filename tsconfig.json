@@ -4,9 +4,17 @@
         "module": "commonjs",
         "sourceMap": true,
         "rootDir": "src",
-        "outDir": "dist"
+        "outDir": "dist",
+        "typeRoots": [
+            "./typings",
+            "./node_modules/@types"
+        ]
     },
     "exclude": [
         "node_modules"
+    ],
+    "include": [
+        "typings/**/*",
+        "src/**/*"
     ]
 }

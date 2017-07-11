@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
+declare var __dirname: string
 
-let win;
+let win : Electron.BrowserWindow;
 
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 });
