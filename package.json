@@ -2,16 +2,18 @@
   "name": "fluid",
   "version": "0.1.0",
   "description": "Tiny Sales management application",
-  "main": "dist/main/main.js",
+  "main": "./main/main.js",
   "scripts": {
-    "build": "yarn run clean && webpack",
+    "build": "yarn run clean && webpack && yarn run copy",
     "build:renderer": "webpack",
-    "clean": "rimraf dist",
+    "copy": "cpx package.json dist",
+    "clean": "rimraf dist && rimraf release",
     "elm:make": "elm-make --output dist/renderer/Main.js src/renderer/Main.elm",
     "elm:install": "elm-package install",
-    "start": "yarn run build && electron .",
+    "start": "yarn run build && electron dist",
     "watch": "yarn run clean && tsc --watch",
-    "electron": "electron ."
+    "electron": "electron .",
+    "package": "yarn run build && electron-packager dist flluid --platform darwin  --out release"
   },
   "keywords": [
     "electron",
@@ -22,8 +24,12 @@
   "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.1",
+    "cpx": "^1.5.0",
     "electron": "^1.6.11",
+    "electron-packager": "^8.7.2",
     "elm-webpack-loader": "^4.3.1",
+    "html-webpack-include-assets-plugin": "^0.0.6",
+    "html-webpack-plugin": "^2.29.0",
     "rimraf": "^2.6.1",
     "typescript": "^2.4.1",
     "webpack": "^3.0.0"

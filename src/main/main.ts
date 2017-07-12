@@ -6,7 +6,7 @@ let win : Electron.BrowserWindow;
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 });
     // TODO fix url
-    win.loadURL(`file://${__dirname}/../../index.html`);
+    win.loadURL(`file://${__dirname}/../renderer/index.html`);
     win.on("closed", () => win = null);
 }
 

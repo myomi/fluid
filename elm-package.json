@@ -4,7 +4,7 @@
     "repository": "https://github.com/myomi/fluid.git",
     "license": "MIT",
     "source-directories": [
-        "src/renderer/elm"
+        "src/renderer"
     ],
     "exposed-modules": [],
     "dependencies": {
