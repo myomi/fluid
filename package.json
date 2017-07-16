@@ -9,7 +9,12 @@
     "clean": "rimraf dist && rimraf release",
     "elm:install": "elm-package install",
     "start": "concurrently --kill-others \"yarn run build -- --watch\" \"electron dist\"",
-    "package:mac": "yarn run build && electron-packager dist flluid --platform darwin  --out release"
+    "package:mac": "yarn run build && electron-builder --mac --projectDir dist"
+  },
+  "build": {
+    "directories": {
+      "output": "../release"
+    }
   },
   "keywords": [
     "electron",
@@ -24,7 +29,7 @@
     "cpx": "^1.5.0",
     "css-loader": "^0.28.4",
     "electron": "^1.6.11",
-    "electron-packager": "^8.7.2",
+    "electron-builder": "^19.16.0",
     "elm": "^0.18.0",
     "elm-webpack-loader": "^4.3.1",
     "extract-text-webpack-plugin": "^3.0.0",
