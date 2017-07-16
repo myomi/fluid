@@ -4,11 +4,11 @@
   "description": "Tiny Sales management application",
   "main": "./main/main.js",
   "scripts": {
-    "build": "yarn run clean && webpack && yarn run copy",
+    "build": "yarn run clean && yarn run copy && webpack",
     "copy": "cpx package.json dist",
     "clean": "rimraf dist && rimraf release",
     "elm:install": "elm-package install",
-    "start": "yarn run build && electron dist",
+    "start": "concurrently --kill-others \"yarn run build -- --watch\" \"electron dist\"",
     "package:mac": "yarn run build && electron-packager dist flluid --platform darwin  --out release"
   },
   "keywords": [
@@ -20,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.1",
+    "concurrently": "^3.5.0",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.4",
     "electron": "^1.6.11",
