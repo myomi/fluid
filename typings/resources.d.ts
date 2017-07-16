@@ -18,15 +18,20 @@ declare module "*.jpeg" {
   export default content;
 }
 
-interface ElmMain {
-    embed(HtmlElement): any;
+declare module "*.elm" {
+  const Elm: Elm;
+  export = Elm;
 }
 
 interface Elm {
     Main: ElmMain;
 }
 
-declare module "*.elm" {
-  const Elm: Elm;
-  export = Elm;
+interface ElmMain {
+    embed(HtmlElement): ElmApplication;
+    fullscreen(HtmlElement): ElmApplication;
+}
+
+interface ElmApplication {
+    ports: any;
 }

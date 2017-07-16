@@ -8,7 +8,7 @@ declare var __dirname: string
 let win : Electron.BrowserWindow;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({ fullscreen: true });
     // TODO fix url
     win.loadURL(`file://${__dirname}/../renderer/index.html`);
     win.on("closed", () => win = null);
