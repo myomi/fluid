@@ -8,8 +8,9 @@
     "copy": "cpx package.json dist",
     "clean": "rimraf dist && rimraf release",
     "elm:install": "elm-package install",
-    "start": "concurrently --kill-others \"yarn run build -- --watch\" \"electron dist\"",
-    "package:mac": "yarn run build && electron-builder --mac --projectDir dist"
+    "start": "yarn run build && electron dist",
+    "package:mac": "yarn run build && electron-builder --mac --projectDir dist",
+    "postinstall": "install-app-deps"
   },
   "build": {
     "directories": {
@@ -42,6 +43,7 @@
     "webpack": "^3.3.0"
   },
   "dependencies": {
-    "chime.scss": "^0.1.0"
+    "chime.scss": "^0.1.0",
+    "sqlite3": "^3.1.8"
   }
 }
