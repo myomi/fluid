@@ -5,15 +5,11 @@
   "main": "./main/main.js",
   "scripts": {
     "build": "yarn run clean && webpack && yarn run copy",
-    "build:renderer": "webpack",
     "copy": "cpx package.json dist",
     "clean": "rimraf dist && rimraf release",
-    "elm:make": "elm-make --output dist/renderer/Main.js src/renderer/Main.elm",
     "elm:install": "elm-package install",
     "start": "yarn run build && electron dist",
-    "watch": "yarn run clean && tsc --watch",
-    "electron": "electron .",
-    "package": "yarn run build && electron-packager dist flluid --platform darwin  --out release"
+    "package:mac": "yarn run build && electron-packager dist flluid --platform darwin  --out release"
   },
   "keywords": [
     "electron",
