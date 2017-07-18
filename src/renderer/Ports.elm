@@ -1,4 +1,7 @@
 port module Ports exposing (..)
 
 
-port suggestions : (List String -> msg) -> Sub msg
+port reqestDatabases : () -> Cmd msg
+
+
+port responseDatabases : (List String -> msg) -> Sub msg

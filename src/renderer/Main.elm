@@ -29,8 +29,9 @@ type alias Resource =
 
 
 type Msg
-    = Suggestions (List String)
+    = Databases (List String)
     | NewDB
+    | LoadDB
 
 
 
@@ -42,6 +43,7 @@ view model =
     nav []
         [ ul [] (list model)
         , button [ onClick NewDB ] [ text "New" ]
+        , button [ onClick LoadDB ] [ text "Load" ]
         ]
 
 
@@ -62,11 +64,14 @@ row label =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Suggestions labels ->
-            ( labels, Cmd.none )
+        Databases labels ->
+            ( List.append model labels, Cmd.none )
 
         NewDB ->
             ( List.append [ "aaa" ] model, Cmd.none )
+
+        LoadDB ->
+            ( model, Ports.reqestDatabases () )
 
 
 
@@ -75,7 +80,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Ports.suggestions Suggestions
+    Ports.responseDatabases Databases
 
 
 
