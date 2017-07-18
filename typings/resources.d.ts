@@ -28,10 +28,10 @@ interface Elm {
 }
 
 interface ElmMain {
-    embed(HtmlElement): ElmApplication;
-    fullscreen(HtmlElement): ElmApplication;
+    embed(HtmlElement): ElmProgram;
+    fullscreen(HtmlElement): ElmProgram;
 }
 
-interface ElmApplication {
+interface ElmProgram {
     ports: any;
 }
