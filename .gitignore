@@ -5,3 +5,4 @@ release/
 **/*.js.map
 elm-stuff/
 .DS_Store
+!webpack.config.js
