@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import * as sqlite3 from "sqlite3";
 import * as fs from "fs";
 import * as path from "path";
@@ -24,6 +24,13 @@ function createWindow() {
         var db = new sqlite3.Database(dbFile);
         db.run('CREATE TABLE mytable (title STRING, id INTEGER, is_done BOOLEAN);');
     }
+
+    ipcMain.on("/ipc/databases:get", function(event, args) {
+        event.sender.send("/ipc/databases:get:response", [
+            "Hello",
+            "IPC"
+        ]);
+    })
 }
 
 app.on("ready", createWindow);
