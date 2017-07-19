@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Html exposing (Html, nav, ul, li, button, input, text)
 import Html.Events exposing (onClick)
-import Ports
+import Ports.Ports
 
 
 init : ( Model, Cmd Msg )
@@ -71,7 +71,7 @@ update msg model =
             ( List.append [ "aaa" ] model, Cmd.none )
 
         LoadDB ->
-            ( model, Ports.reqestDatabases () )
+            ( model, Ports.Ports.reqestDatabases () )
 
 
 
@@ -80,7 +80,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Ports.responseDatabases Databases
+    Ports.Ports.responseDatabases Databases
 
 
 
