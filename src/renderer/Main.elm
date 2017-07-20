@@ -1,13 +1,17 @@
 module Main exposing (..)
 
-import Html exposing (Html, nav, ul, li, button, input, text)
+import Html exposing (Html, div, main_, nav, ul, li, button, input, text)
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (class)
 import Ports.Ports
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( [], Cmd.none )
+    { databases = []
+    , subWindow = False
+    }
+        ! []
 
 
 
@@ -15,12 +19,8 @@ init =
 
 
 type alias Model =
-    List String
-
-
-type alias Resource =
-    { path : String
-    , name : String
+    { databases : List String
+    , subWindow : Bool
     }
 
 
@@ -32,6 +32,7 @@ type Msg
     = Databases (List String)
     | NewDB
     | LoadDB
+    | ClickBackdrop
 
 
 
@@ -40,14 +41,41 @@ type Msg
 
 view : Model -> Html Msg
 view model =
+    div []
+        (List.append
+            [ sideNavigation model
+            , mainContent model
+            ]
+            (subWindow model)
+        )
+
+
+sideNavigation : Model -> Html Msg
+sideNavigation model =
     nav []
-        [ ul [] (list model)
+        [ ul [] (list model.databases)
         , button [ onClick NewDB ] [ text "New" ]
         , button [ onClick LoadDB ] [ text "Load" ]
         ]
 
 
-list : Model -> List (Html Msg)
+mainContent : Model -> Html Msg
+mainContent model =
+    main_ [] []
+
+
+subWindow : Model -> List (Html Msg)
+subWindow model =
+    case model.subWindow of
+        True ->
+            [ div [ class "backdrop", onClick ClickBackdrop ] []
+            ]
+
+        False ->
+            []
+
+
+list : List String -> List (Html Msg)
 list model =
     List.map row model
 
@@ -65,13 +93,16 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Databases labels ->
-            ( List.append model labels, Cmd.none )
+            ( { model | databases = labels }, Cmd.none )
 
         NewDB ->
-            ( List.append [ "aaa" ] model, Cmd.none )
+            ( { model | subWindow = True }, Cmd.none )
 
         LoadDB ->
             ( model, Ports.Ports.reqestDatabases () )
+
+        ClickBackdrop ->
+            ( { model | subWindow = False }, Cmd.none )
 
 
 
