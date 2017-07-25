@@ -3,7 +3,7 @@ module Main exposing (..)
 import Html exposing (Html, div, main_, nav, ul, li, button, input, text, h1, h2, h3)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class)
-import Ports.Ports
+import Ports.Ports exposing (getConfig)
 
 
 init : ( Model, Cmd Msg )
@@ -65,7 +65,6 @@ mainContent : Model -> Html Msg
 mainContent model =
     main_ []
         [ button [ onClick NewDB ] [ text "New" ]
-        , button [ onClick LoadDB ] [ text "Load" ]
         , button [ onClick OpenDB ] [ text "Open" ]
         ]
 
