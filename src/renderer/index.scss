@@ -1,13 +1,24 @@
 @import '~normalize.css/normalize.css';
 @import '~chime.scss/scss/base/_base';
 
+$backdrop-bg: rgba(55, 55, 55, 0.3);
 
 .backdrop {
+    position: fixed;
     display: block;
-    position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(55, 55, 55, 0.3);
+    background-color: $backdrop-bg;
+}
+
+.modal {
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+
+    background-color: white;
+    border-radius: 1rem;
+    border: 1px solid #000000;
 }

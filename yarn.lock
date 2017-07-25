@@ -22,9 +22,19 @@
     "7zip-bin-mac" "^1.0.1"
     "7zip-bin-win" "^2.1.0"
 
-"@types/node@^7.0.18":
+"@types/node@*", "@types/node@^7.0.18":
   version "7.0.33"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.33.tgz#ae3c53ad01d7e9d62c7f1a85c5f7500d59b9d25b"
+
+"@types/node@^8.0.14":
+  version "8.0.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.14.tgz#4a19dc6bb61d16c01cbadc7b30ac23518fff176b"
+
+"@types/sqlite3@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@types/sqlite3/-/sqlite3-3.1.0.tgz#4e906a86aac9992899633c83e583a1c054fcca79"
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1:
   version "1.1.0"

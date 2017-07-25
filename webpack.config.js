@@ -36,6 +36,9 @@ const serverConfig = {
             ]
         }]
     },
+    resolve: {
+        extensions: ['.js', '.ts']
+    },
     devtool: 'source-map'
 };
 

@@ -1,7 +1,9 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, dialog } from "electron";
 import * as sqlite3 from "sqlite3";
 import * as fs from "fs";
 import * as path from "path";
+import setupEvents from "./event";
+import FluidConfig from "./fluid.config";
 
 declare var __dirname: string
 
@@ -17,7 +19,10 @@ function createWindow() {
     if (!fs.existsSync(base)) {
         fs.mkdirSync(base);
     }
-    var dbFile = path.join(base, "db.sqlite3");
+    var configFile = path.join(base, "config.json");
+    var config = new FluidConfig(configFile);
+
+    var dbFile = path.join(base, "fluid.sqlite3");
     if (fs.existsSync(dbFile)) {
         var db = new sqlite3.Database(dbFile);
     } else {
@@ -25,12 +30,7 @@ function createWindow() {
         db.run('CREATE TABLE mytable (title STRING, id INTEGER, is_done BOOLEAN);');
     }
 
-    ipcMain.on("/ipc/databases:get", function(event, args) {
-        event.sender.send("/ipc/databases:get:response", [
-            "Hello",
-            "IPC"
-        ]);
-    })
+    setupEvents(win, base, config);
 }
 
 app.on("ready", createWindow);

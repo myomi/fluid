@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, div, main_, nav, ul, li, button, input, text)
+import Html exposing (Html, div, main_, nav, ul, li, button, input, text, h1, h2, h3)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class)
 import Ports.Ports
@@ -8,10 +8,12 @@ import Ports.Ports
 
 init : ( Model, Cmd Msg )
 init =
-    { databases = []
-    , subWindow = False
-    }
-        ! []
+    ( { config = { databases = [] }
+      , databases = []
+      , subWindow = False
+      }
+    , Ports.Ports.getConfig ()
+    )
 
 
 
@@ -19,7 +21,8 @@ init =
 
 
 type alias Model =
-    { databases : List String
+    { config : Ports.Ports.FluidConfig
+    , databases : List String
     , subWindow : Bool
     }
 
@@ -30,9 +33,12 @@ type alias Model =
 
 type Msg
     = Databases (List String)
+    | Config Ports.Ports.FluidConfig
     | NewDB
     | LoadDB
     | ClickBackdrop
+    | OpenDB
+    | OpenDBResponse Ports.Ports.FluidConfig
 
 
 
@@ -53,15 +59,17 @@ view model =
 sideNavigation : Model -> Html Msg
 sideNavigation model =
     nav []
-        [ ul [] (list model.databases)
-        , button [ onClick NewDB ] [ text "New" ]
-        , button [ onClick LoadDB ] [ text "Load" ]
+        [ ul [] (list model.config.databases)
         ]
 
 
 mainContent : Model -> Html Msg
 mainContent model =
-    main_ [] []
+    main_ []
+        [ button [ onClick NewDB ] [ text "New" ]
+        , button [ onClick LoadDB ] [ text "Load" ]
+        , button [ onClick OpenDB ] [ text "Open" ]
+        ]
 
 
 subWindow : Model -> List (Html Msg)
@@ -69,6 +77,7 @@ subWindow model =
     case model.subWindow of
         True ->
             [ div [ class "backdrop", onClick ClickBackdrop ] []
+            , div [ class "modal" ] [ h1 [] [ text "Hello, World" ] ]
             ]
 
         False ->
@@ -92,6 +101,12 @@ row label =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Config config ->
+            ( { model | config = config }, Cmd.none )
+
+        OpenDBResponse config ->
+            ( { model | config = config }, Cmd.none )
+
         Databases labels ->
             ( { model | databases = labels }, Cmd.none )
 
@@ -104,6 +119,9 @@ update msg model =
         ClickBackdrop ->
             ( { model | subWindow = False }, Cmd.none )
 
+        OpenDB ->
+            ( model, Ports.Ports.openDatabase () )
+
 
 
 -- Subscriptions
@@ -111,7 +129,11 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Ports.Ports.responseDatabases Databases
+    Sub.batch
+        [ Ports.Ports.responseDatabases Databases
+        , Ports.Ports.getConfigResponse Config
+        , Ports.Ports.openDatabaseResponse Config
+        ]
 
 
 
