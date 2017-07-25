@@ -32,10 +32,8 @@ type alias Model =
 
 
 type Msg
-    = Databases (List String)
-    | Config Ports.Ports.FluidConfig
+    = Config Ports.Ports.FluidConfig
     | NewDB
-    | LoadDB
     | ClickBackdrop
     | OpenDB
     | OpenDBResponse Ports.Ports.FluidConfig
@@ -107,14 +105,8 @@ update msg model =
         OpenDBResponse config ->
             ( { model | config = config }, Cmd.none )
 
-        Databases labels ->
-            ( { model | databases = labels }, Cmd.none )
-
         NewDB ->
             ( { model | subWindow = True }, Cmd.none )
-
-        LoadDB ->
-            ( model, Ports.Ports.reqestDatabases () )
 
         ClickBackdrop ->
             ( { model | subWindow = False }, Cmd.none )
@@ -130,8 +122,7 @@ update msg model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ Ports.Ports.responseDatabases Databases
-        , Ports.Ports.getConfigResponse Config
+        [ Ports.Ports.getConfigResponse Config
         , Ports.Ports.openDatabaseResponse Config
         ]
 
