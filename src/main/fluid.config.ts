@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 export default class FluidConfig {
-    databases: string[] = [];
+    private databases: string[] = [];
 
     constructor(path: string) {
         var config:FluidConfig = null;
@@ -24,5 +24,12 @@ export default class FluidConfig {
             });
         }
         return config;
+    }
+
+    public addDatabase(path: string): void {
+        if (this.databases.indexOf(path) >= 0) {
+            return;
+        }
+        this.databases.push(path);
     }
 }

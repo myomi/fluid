@@ -16,7 +16,7 @@ export default function setupEvents(win: Electron.BrowserWindow, base: string, c
             properties: ["openFile"]
         }, (path : string[]) => {
             if (path && path.length > 0) {
-                config.databases.push(path[0]);
+                config.addDatabase(path[0]);
                 event.sender.send("database:open:response", config);
             }
         });
