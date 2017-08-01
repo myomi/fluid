@@ -9,6 +9,10 @@ export default function setupEvents(win: Electron.BrowserWindow, base: string, c
         ]);
     });
 
+    ipcMain.on("config:get", function(event, args) {
+        event.sender.send("config:get:response", config);
+    });
+
     ipcMain.on("database:open", function(event, args) {
         dialog.showOpenDialog(win, {
             title: "Open Database",
