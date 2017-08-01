@@ -2,13 +2,6 @@ import { BrowserWindow, ipcMain, dialog } from "electron";
 import FluidConfig from "./fluid.config";
 
 export default function setupEvents(win: Electron.BrowserWindow, base: string, config: FluidConfig) {
-    ipcMain.on("/ipc/databases:get", function(event, args) {
-        event.sender.send("/ipc/databases:get:response", [
-            "Hello",
-            "IPC"
-        ]);
-    });
-
     ipcMain.on("config:get", function(event, args) {
         event.sender.send("config:get:response", config);
     });
