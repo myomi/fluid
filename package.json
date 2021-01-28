@@ -31,7 +31,7 @@
     "concurrently": "^3.5.0",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.4",
-    "electron": "^1.6.11",
+    "electron": "^9.4.0",
     "electron-builder": "^19.16.0",
     "elm": "^0.18.0",
     "elm-webpack-loader": "^4.3.1",
